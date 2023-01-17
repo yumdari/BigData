@@ -4,10 +4,10 @@ title = []
 link = []
 urlstr = 'http://www.yes24.com/SearchCorner/Search?domain=BOOK&query=python'
 r = requests.get(urlstr)
-#r.encoding = "utf-8"
+r.encoding = "utf-8"
 bs = BeautifulSoup(r.text, 'html.parser')
-titleList = bs.select('p.goods_name.goods_icon > a > strong')
-linklList = bs.select('p.goods_name.goods_icon > a')
+titleList = bs.select('div.info_row.info_name > a')
+linklList = bs.select('div.info_row.info_name > a')
 
 for titleDom in titleList :
     title.append(titleDom.string)
