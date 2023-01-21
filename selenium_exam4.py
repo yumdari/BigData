@@ -1,19 +1,21 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 driver = webdriver.Chrome('C:workspace/chromedriver')
 driver.implicitly_wait(3)
 driver.get("https://www.starbucks.co.kr/store/store_map.do?disp=quick")
 import time
 time.sleep(2)
-loca = driver.find_element_by_class_name('loca_search')
+loca = driver.find_element(By.CLASS_NAME,"loca_search")
+
 loca.click()
 time.sleep(2)
-f_link = driver.find_element_by_css_selector("div.loca_step1_cont > ul > li:nth-child(1) > a")
+f_link = driver.find_element(By.CSS_SELECTOR,"div.loca_step1_cont > ul > li:nth-child(1) > a")
 f_link.click()
 time.sleep(2)
-s_link = driver.find_element_by_css_selector("#mCSB_2_container > ul > li:nth-child(1) > a")
+s_link = driver.find_element(By.CSS_SELECTOR,"#mCSB_2_container > ul > li:nth-child(1) > a")
 s_link.click()
 time.sleep(2)
-shopList = driver.find_elements_by_css_selector("#mCSB_3_container > ul > li")
+shopList = driver.find_element(By.CSS_SELECTOR,"#mCSB_3_container > ul > li")
 temp_list = []
 time.sleep(3)
 count = 0
@@ -23,8 +25,9 @@ for shop in shopList :
     shoplat = shop.get_attribute("data-lat")
     shoplong = shop.get_attribute("date-long")
 
-shopname = shop.find_element_by_tag_name("strong")
-shopinfo = shop.find_element_by_tag_name("p")
+shopname = shop.find_element(By.TAG_NAME,"strong")
+shopinfo = shop.find_element(By.TAG_NAME,"p")
+
 splitinfo = shopinfo.text.split('\n')
 if(len(splitinfo) == 2) :
     addr = splitinfo[0]
